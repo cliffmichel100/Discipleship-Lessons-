@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Discipleship Lessons — a simple, free, mobile-friendly lesson viewer.">
+<title>Discipleship Lessons</title>
+<style>
+:root {
+  --bg:#f6f7f9; --card:#fff; --text:#172033; --muted:#667085;
+  --accent:#2457d6; --border:#e5e7eb; --shadow:0 8px 28px rgba(16,24,40,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:16px}
+.brand{font-weight:800;font-size:1.05rem;white-space:nowrap}
+.search{margin-left:auto;width:min(360px,48vw);padding:10px 13px;border:1px solid var(--border);border-radius:10px;font-size:15px;outline:none}
+.search:focus{border-color:var(--accent)}
+main{max-width:1100px;margin:auto;padding:28px 18px 70px}
+.hero{background:linear-gradient(135deg,#182b55,#2f5fbd);color:#fff;border-radius:20px;padding:34px 28px;margin-bottom:24px;box-shadow:var(--shadow)}
+.hero h1{margin:0 0 8px;font-size:clamp(1.8rem,4vw,3rem)}
+.hero p{margin:0;opacity:.9;max-width:720px;line-height:1.6}
+.cover{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:24px;box-shadow:var(--shadow)}
+.cover img{width:100%;display:block;border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.lesson{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow);transition:.15s}
+.lesson:hover{transform:translateY(-2px)}
+.lesson h2{font-size:1.05rem;margin:0 0 5px}
+.lesson .num{color:var(--accent);font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}
+.lesson p{color:var(--muted);margin:8px 0 14px;font-size:.92rem}
+.btn{display:inline-block;border:0;background:var(--accent);color:white;text-decoration:none;padding:9px 12px;border-radius:9px;font-weight:700;font-size:.9rem}
+section{scroll-margin-top:90px;margin-top:34px}
+.lesson-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
+.lesson-head h2{margin:0;font-size:1.45rem}
+.pages{display:grid;gap:18px}
+.page{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+.page img{width:100%;height:auto;display:block;border-radius:9px;background:#eee}
+.page-caption{padding:8px 3px 2px;color:var(--muted);font-size:.82rem}
+.top{font-size:.85rem;color:var(--accent);text-decoration:none}
+.empty{display:none;padding:30px;text-align:center;color:var(--muted)}
+footer{max-width:1100px;margin:0 auto;padding:25px 18px 50px;color:var(--muted);font-size:.85rem;text-align:center}
+@media(max-width:600px){.nav{flex-wrap:wrap}.search{order:3;width:100%;margin-left:0}.hero{padding:26px 20px}main{padding-top:20px}}
+@media print{header,.grid,.top,footer{display:none!important}body{background:#fff}.page{box-shadow:none;break-inside:avoid}section{break-before:page}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">📖 Discipleship Lessons</div>
+    <input id="search" class="search" type="search" placeholder="Search lessons…" aria-label="Search lessons">
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <h1>Discipleship Lessons</h1>
+    <p>All 16 lessons are separated into their lesson sections while keeping the original page filenames and page order from the supplied material.</p>
+  </div>
+
+  <div class="cover">
+    <img src="images/1.jpg" alt="Discipleship Lessons cover/introduction" loading="eager">
+  </div>
+
+  <div id="lessonGrid" class="grid">
+    <article class="lesson" data-search="Lesson 1 THE WORD OF GOD"><div class="num">Lesson 1</div><h2>THE WORD OF GOD</h2><p>4 pages</p><a class="btn" href="#lesson-1">Open lesson</a></article><article class="lesson" data-search="Lesson 2 SALVATION"><div class="num">Lesson 2</div><h2>SALVATION</h2><p>3 pages</p><a class="btn" href="#lesson-2">Open lesson</a></article><article class="lesson" data-search="Lesson 3 ETERNAL SECURITY"><div class="num">Lesson 3</div><h2>ETERNAL SECURITY</h2><p>3 pages</p><a class="btn" href="#lesson-3">Open lesson</a></article><article class="lesson" data-search="Lesson 4 BAPTISM"><div class="num">Lesson 4</div><h2>BAPTISM</h2><p>3 pages</p><a class="btn" href="#lesson-4">Open lesson</a></article><article class="lesson" data-search="Lesson 5 THE HOLY SPIRIT"><div class="num">Lesson 5</div><h2>THE HOLY SPIRIT</h2><p>3 pages</p><a class="btn" href="#lesson-5">Open lesson</a></article><article class="lesson" data-search="Lesson 6 PRAYER"><div class="num">Lesson 6</div><h2>PRAYER</h2><p>3 pages</p><a class="btn" href="#lesson-6">Open lesson</a></article><article class="lesson" data-search="Lesson 7 THE WILL OF GOD"><div class="num">Lesson 7</div><h2>THE WILL OF GOD</h2><p>4 pages</p><a class="btn" href="#lesson-7">Open lesson</a></article><article class="lesson" data-search="Lesson 8 THE NEW TESTAMENT CHURCH"><div class="num">Lesson 8</div><h2>THE NEW TESTAMENT CHURCH</h2><p>4 pages</p><a class="btn" href="#lesson-8">Open lesson</a></article><article class="lesson" data-search="Lesson 9 OTHER CHRISTIANS"><div class="num">Lesson 9</div><h2>OTHER CHRISTIANS</h2><p>3 pages</p><a class="btn" href="#lesson-9">Open lesson</a></article><article class="lesson" data-search="Lesson 10 GIVING"><div class="num">Lesson 10</div><h2>GIVING</h2><p>4 pages</p><a class="btn" href="#lesson-10">Open lesson</a></article><article class="lesson" data-search="Lesson 11 MONEY & POSSESSIONS"><div class="num">Lesson 11</div><h2>MONEY & POSSESSIONS</h2><p>4 pages</p><a class="btn" href="#lesson-11">Open lesson</a></article><article class="lesson" data-search="Lesson 12 DEALING WITH SIN"><div class="num">Lesson 12</div><h2>DEALING WITH SIN</h2><p>4 pages</p><a class="btn" href="#lesson-12">Open lesson</a></article><article class="lesson" data-search="Lesson 13 LIBERTY IN CHRIST"><div class="num">Lesson 13</div><h2>LIBERTY IN CHRIST</h2><p>2 pages</p><a class="btn" href="#lesson-13">Open lesson</a></article><article class="lesson" data-search="Lesson 14 MY JOB & EMPLOYER"><div class="num">Lesson 14</div><h2>MY JOB & EMPLOYER</h2><p>4 pages</p><a class="btn" href="#lesson-14">Open lesson</a></article><article class="lesson" data-search="Lesson 15 THE UNSAVED WORLD"><div class="num">Lesson 15</div><h2>THE UNSAVED WORLD</h2><p>4 pages</p><a class="btn" href="#lesson-15">Open lesson</a></article><article class="lesson" data-search="Lesson 16 THE JUDGEMENT SEAT OF CHRIST"><div class="num">Lesson 16</div><h2>THE JUDGEMENT SEAT OF CHRIST</h2><p>3 pages</p><a class="btn" href="#lesson-16">Open lesson</a></article>
+  </div>
+  <div id="empty" class="empty">No matching lessons found.</div>
+
+  <section id="lesson-1" data-section-search="Lesson 1 THE WORD OF GOD">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 1</div><h2>THE WORD OF GOD</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/2.jpg" alt="Lesson 1 — page 2" loading="lazy"><div class="page-caption">Original page 2</div></div><div class="page"><img src="images/3.jpg" alt="Lesson 1 — page 3" loading="lazy"><div class="page-caption">Original page 3</div></div><div class="page"><img src="images/4.jpg" alt="Lesson 1 — page 4" loading="lazy"><div class="page-caption">Original page 4</div></div><div class="page"><img src="images/5.jpg" alt="Lesson 1 — page 5" loading="lazy"><div class="page-caption">Original page 5</div></div>
+      </div>
+    </section><section id="lesson-2" data-section-search="Lesson 2 SALVATION">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 2</div><h2>SALVATION</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/6.jpg" alt="Lesson 2 — page 6" loading="lazy"><div class="page-caption">Original page 6</div></div><div class="page"><img src="images/7.jpg" alt="Lesson 2 — page 7" loading="lazy"><div class="page-caption">Original page 7</div></div><div class="page"><img src="images/8.jpg" alt="Lesson 2 — page 8" loading="lazy"><div class="page-caption">Original page 8</div></div>
+      </div>
+    </section><section id="lesson-3" data-section-search="Lesson 3 ETERNAL SECURITY">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 3</div><h2>ETERNAL SECURITY</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/9.jpg" alt="Lesson 3 — page 9" loading="lazy"><div class="page-caption">Original page 9</div></div><div class="page"><img src="images/10.jpg" alt="Lesson 3 — page 10" loading="lazy"><div class="page-caption">Original page 10</div></div><div class="page"><img src="images/11.jpg" alt="Lesson 3 — page 11" loading="lazy"><div class="page-caption">Original page 11</div></div>
+      </div>
+    </section><section id="lesson-4" data-section-search="Lesson 4 BAPTISM">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 4</div><h2>BAPTISM</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/12.jpg" alt="Lesson 4 — page 12" loading="lazy"><div class="page-caption">Original page 12</div></div><div class="page"><img src="images/13.jpg" alt="Lesson 4 — page 13" loading="lazy"><div class="page-caption">Original page 13</div></div><div class="page"><img src="images/14.jpg" alt="Lesson 4 — page 14" loading="lazy"><div class="page-caption">Original page 14</div></div>
+      </div>
+    </section><section id="lesson-5" data-section-search="Lesson 5 THE HOLY SPIRIT">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 5</div><h2>THE HOLY SPIRIT</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/15.jpg" alt="Lesson 5 — page 15" loading="lazy"><div class="page-caption">Original page 15</div></div><div class="page"><img src="images/16.jpg" alt="Lesson 5 — page 16" loading="lazy"><div class="page-caption">Original page 16</div></div><div class="page"><img src="images/17.jpg" alt="Lesson 5 — page 17" loading="lazy"><div class="page-caption">Original page 17</div></div>
+      </div>
+    </section><section id="lesson-6" data-section-search="Lesson 6 PRAYER">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 6</div><h2>PRAYER</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/18.jpg" alt="Lesson 6 — page 18" loading="lazy"><div class="page-caption">Original page 18</div></div><div class="page"><img src="images/19.jpg" alt="Lesson 6 — page 19" loading="lazy"><div class="page-caption">Original page 19</div></div><div class="page"><img src="images/20.jpg" alt="Lesson 6 — page 20" loading="lazy"><div class="page-caption">Original page 20</div></div>
+      </div>
+    </section><section id="lesson-7" data-section-search="Lesson 7 THE WILL OF GOD">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 7</div><h2>THE WILL OF GOD</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/21.jpg" alt="Lesson 7 — page 21" loading="lazy"><div class="page-caption">Original page 21</div></div><div class="page"><img src="images/22.jpg" alt="Lesson 7 — page 22" loading="lazy"><div class="page-caption">Original page 22</div></div><div class="page"><img src="images/23.jpg" alt="Lesson 7 — page 23" loading="lazy"><div class="page-caption">Original page 23</div></div><div class="page"><img src="images/24.jpg" alt="Lesson 7 — page 24" loading="lazy"><div class="page-caption">Original page 24</div></div>
+      </div>
+    </section><section id="lesson-8" data-section-search="Lesson 8 THE NEW TESTAMENT CHURCH">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 8</div><h2>THE NEW TESTAMENT CHURCH</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/25.jpg" alt="Lesson 8 — page 25" loading="lazy"><div class="page-caption">Original page 25</div></div><div class="page"><img src="images/26.jpg" alt="Lesson 8 — page 26" loading="lazy"><div class="page-caption">Original page 26</div></div><div class="page"><img src="images/27.jpg" alt="Lesson 8 — page 27" loading="lazy"><div class="page-caption">Original page 27</div></div><div class="page"><img src="images/28.jpg" alt="Lesson 8 — page 28" loading="lazy"><div class="page-caption">Original page 28</div></div>
+      </div>
+    </section><section id="lesson-9" data-section-search="Lesson 9 OTHER CHRISTIANS">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 9</div><h2>OTHER CHRISTIANS</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/29.jpg" alt="Lesson 9 — page 29" loading="lazy"><div class="page-caption">Original page 29</div></div><div class="page"><img src="images/30.jpg" alt="Lesson 9 — page 30" loading="lazy"><div class="page-caption">Original page 30</div></div><div class="page"><img src="images/31.jpg" alt="Lesson 9 — page 31" loading="lazy"><div class="page-caption">Original page 31</div></div>
+      </div>
+    </section><section id="lesson-10" data-section-search="Lesson 10 GIVING">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 10</div><h2>GIVING</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/32.jpg" alt="Lesson 10 — page 32" loading="lazy"><div class="page-caption">Original page 32</div></div><div class="page"><img src="images/33.jpg" alt="Lesson 10 — page 33" loading="lazy"><div class="page-caption">Original page 33</div></div><div class="page"><img src="images/34.jpg" alt="Lesson 10 — page 34" loading="lazy"><div class="page-caption">Original page 34</div></div><div class="page"><img src="images/35.jpg" alt="Lesson 10 — page 35" loading="lazy"><div class="page-caption">Original page 35</div></div>
+      </div>
+    </section><section id="lesson-11" data-section-search="Lesson 11 MONEY & POSSESSIONS">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 11</div><h2>MONEY & POSSESSIONS</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/36.jpg" alt="Lesson 11 — page 36" loading="lazy"><div class="page-caption">Original page 36</div></div><div class="page"><img src="images/37.jpg" alt="Lesson 11 — page 37" loading="lazy"><div class="page-caption">Original page 37</div></div><div class="page"><img src="images/38.jpg" alt="Lesson 11 — page 38" loading="lazy"><div class="page-caption">Original page 38</div></div><div class="page"><img src="images/39.jpg" alt="Lesson 11 — page 39" loading="lazy"><div class="page-caption">Original page 39</div></div>
+      </div>
+    </section><section id="lesson-12" data-section-search="Lesson 12 DEALING WITH SIN">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 12</div><h2>DEALING WITH SIN</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/40.jpg" alt="Lesson 12 — page 40" loading="lazy"><div class="page-caption">Original page 40</div></div><div class="page"><img src="images/41.jpg" alt="Lesson 12 — page 41" loading="lazy"><div class="page-caption">Original page 41</div></div><div class="page"><img src="images/42.jpg" alt="Lesson 12 — page 42" loading="lazy"><div class="page-caption">Original page 42</div></div><div class="page"><img src="images/43.jpg" alt="Lesson 12 — page 43" loading="lazy"><div class="page-caption">Original page 43</div></div>
+      </div>
+    </section><section id="lesson-13" data-section-search="Lesson 13 LIBERTY IN CHRIST">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 13</div><h2>LIBERTY IN CHRIST</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/44.jpg" alt="Lesson 13 — page 44" loading="lazy"><div class="page-caption">Original page 44</div></div><div class="page"><img src="images/45.jpg" alt="Lesson 13 — page 45" loading="lazy"><div class="page-caption">Original page 45</div></div>
+      </div>
+    </section><section id="lesson-14" data-section-search="Lesson 14 MY JOB & EMPLOYER">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 14</div><h2>MY JOB & EMPLOYER</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/46.jpg" alt="Lesson 14 — page 46" loading="lazy"><div class="page-caption">Original page 46</div></div><div class="page"><img src="images/47.jpg" alt="Lesson 14 — page 47" loading="lazy"><div class="page-caption">Original page 47</div></div><div class="page"><img src="images/48.jpg" alt="Lesson 14 — page 48" loading="lazy"><div class="page-caption">Original page 48</div></div><div class="page"><img src="images/49.jpg" alt="Lesson 14 — page 49" loading="lazy"><div class="page-caption">Original page 49</div></div>
+      </div>
+    </section><section id="lesson-15" data-section-search="Lesson 15 THE UNSAVED WORLD">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 15</div><h2>THE UNSAVED WORLD</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/50.jpg" alt="Lesson 15 — page 50" loading="lazy"><div class="page-caption">Original page 50</div></div><div class="page"><img src="images/51.jpg" alt="Lesson 15 — page 51" loading="lazy"><div class="page-caption">Original page 51</div></div><div class="page"><img src="images/52.jpg" alt="Lesson 15 — page 52" loading="lazy"><div class="page-caption">Original page 52</div></div><div class="page"><img src="images/53.jpg" alt="Lesson 15 — page 53" loading="lazy"><div class="page-caption">Original page 53</div></div>
+      </div>
+    </section><section id="lesson-16" data-section-search="Lesson 16 THE JUDGEMENT SEAT OF CHRIST">
+      <div class="lesson-head">
+        <div><div class="num">Lesson 16</div><h2>THE JUDGEMENT SEAT OF CHRIST</h2></div>
+        <a class="top" href="#">Back to top ↑</a>
+      </div>
+      <div class="pages">
+        <div class="page"><img src="images/54.jpg" alt="Lesson 16 — page 54" loading="lazy"><div class="page-caption">Original page 54</div></div><div class="page"><img src="images/55.jpg" alt="Lesson 16 — page 55" loading="lazy"><div class="page-caption">Original page 55</div></div><div class="page"><img src="images/56.jpg" alt="Lesson 16 — page 56" loading="lazy"><div class="page-caption">Original page 56</div></div>
+      </div>
+    </section>
+</main>
+<footer>Prepared as a static website from the supplied Discipleship Lessons ZIP. No external libraries or paid services are required.</footer>
+<script>
+const input=document.getElementById('search');
+const cards=[...document.querySelectorAll('.lesson')];
+const empty=document.getElementById('empty');
+input.addEventListener('input',()=>{
+  const q=input.value.trim().toLowerCase();
+  let count=0;
+  cards.forEach(c=>{
+    const ok=!q || c.dataset.search.toLowerCase().includes(q);
+    c.style.display=ok?'block':'none'; if(ok) count++;
+  });
+  empty.style.display=count?'none':'block';
+});
+</script>
+</body>
+</html>
